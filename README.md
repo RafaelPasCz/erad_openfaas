@@ -1,4 +1,4 @@
-# Tutorial de isntalação: FaasD
+# Tutorial de instalação: FaasD
 ### Instalando o Faasd na Raspberry Pi
 O Faasd é uma re-implementação do openfaas que preza mais pela simplicidade e baixa utilização de recursos computacionais, feito especificamente para rodar em hardware como a raspberry pi, no projeto, o raspberry pi é utilizado como o servidor, e o cliente é um computador que pode invocar a função, para instalar-lo, seguir os seguintes passos:
 
