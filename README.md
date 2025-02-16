@@ -21,7 +21,7 @@ sudo mv faas-cli to /usr/local/bin;
 
 1: export IP=(ip raspberry pi);
 
-2: export PASSWORD=<senha de  /var/lib/faasd/secrets/basic-auth-password>;
+2: export PASSWORD=(senha de  /var/lib/faasd/secrets/basic-auth-password);
 
 3: export OPENFAAS_URL=http://$IP:8080;
 
@@ -70,12 +70,12 @@ Na linha 39 da Dockerfile, adicionamos a seguinte linha
 No diretório, temos o arquivo handler.py, que contém a função a ser executada pelo faasd, o nome desse arquivo não deve ser modificado.
 Para implantar a função, execute os seguintes comandos no terminal:
 
-faas-cli publish -f <arquivo>.yml --platforms linux/arm/v7
+faas-cli publish -f (arquivo).yml --platforms linux/arm/v7
 
-faas-cli deploy -f <arquivo>.yml
+faas-cli deploy -f (arquivo).yml
 
 para invocar a função, execute o seguinte comando: 
 
-faas-cli invoke <nome da função>
+faas-cli invoke (nome da função)
 
 Para utilizar a IU do Openfaas, em seu navegador acesse o seguinte endereço: (IP da raspberry):8080, insira admin como nome de usuario, e a senha utilizada antes para entrar
