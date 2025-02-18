@@ -95,8 +95,8 @@ def processar_imagem():
             mover(imgpath)
             del filaimagens[0]
             sem.release()
-            if dado != None:
-                atualizar_thingspeak(dado)
+#            if dado != None:
+#                atualizar_thingspeak(dado)
 
 
 def atualizar_url():
@@ -150,21 +150,21 @@ def usar_faasd(imgpath):
     else:
         return None
 
-def atualizar_thingspeak(dado):
-    #Função utilizada para atualizar o thingspeak 
-    dado = str(dado)
+#def atualizar_thingspeak(dado):
+#    #Função utilizada para atualizar o thingspeak 
+#    dado = str(dado)
     #Utiliza a API
-    thingspeak_post="https://api.thingspeak.com/update?api_key=IVFBAF2AI2COKBAD&field1=" + dado
-    response = requests.post(thingspeak_post)
+#    thingspeak_post="https://api.thingspeak.com/update?api_key=<Chave API>" + dado
+#    response = requests.post(thingspeak_post)
     #Caso a seção de texto da resposta seja igual a 0, houve algum problema e o thingspeak não foi atualizado
-    with open("log.txt", "a") as log_file:
-        if response.text != 0:
-            log_file.write("thingspeak atualizado com sucesso\n")
-            log_file.flush() 
-        else:
-            log_file.write(f"thingspeak: erro: {response.status_code}\n")
-            log_file.flush() 
-    time.sleep(60)
+#    with open("log.txt", "a") as log_file:
+#        if response.text != 0:
+#            log_file.write("thingspeak atualizado com sucesso\n")
+#            log_file.flush() 
+#        else:
+#            log_file.write(f"thingspeak: erro: {response.status_code}\n")
+#            log_file.flush() 
+#    time.sleep(60)
 
 
 
