@@ -79,3 +79,29 @@ para invocar a função, execute o seguinte comando:
 faas-cli invoke (nome da função)
 
 Para utilizar a IU do Openfaas, em seu navegador acesse o seguinte endereço: (IP da raspberry):8080, insira admin como nome de usuario, e a senha utilizada antes para entrar
+
+# Como executar o processador de imagens
+### motion
+Instale o Motion inserindo o seguinte comando no terminal: sudo apt install motion
+No diretório /etc/motion/, altere o conteúdo arquivo motion.conf para o conteúdo do arquivo de mesmo nome presente neste repositório
+Em seguida, no código do processador de imagens, especifique o caminho para o diretório onde as imagens estão sendo salvas (por padrão, é /var/lib/motion/), isso pode ser modificado no motion.conf
+Também especifique o caminho onde o Haarcascade está salvo em seu computador
+
+    cpu_usage = 0 #Inicializa variável de uso de CPU
+    openfaas_url = atualizar_url() #Inicializa URL do openfaas
+    path = "/var/lib/motion" #Local onde as imagens estão salvas <-- alterar aqui
+    path_haarcascade = path + "/IC_processador-de-imagens/haarcascade.xml" #Local onde o Haarcascade está salvo <-- alterar aqui
+    sem = threading.Semaphore()
+
+Ao processar uma imagem, ela é movida a um diretório de imagens processadas, o caminho desse diretório pode ser alterado na função mover(imagpath);
+
+    def mover(imgpath):
+        global path                         
+        comando = "mv " + imgpath + " " + path + "/imagens_processadas" <-- mudar aqui  # Move a imagem para o diretório de imagens
+        # processadas
+        os.system(comando)
+        f = open("log.txt", "a")
+        f.write(f"moveu {imgpath}\n") #Escreve no log a imagem que foi movida
+        f.close()
+
+Execute o motion no fundo inserindo o seguinte comando: systemctl start motion, e execute o programa.
