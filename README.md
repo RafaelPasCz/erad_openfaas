@@ -28,12 +28,14 @@ sudo mv faas-cli to /usr/local/bin;
 4: faas-cli login –password $PASSWORD;
 
 ### Crie sua função
-Para criar uma função, você deve estar logado no docker em seu computador, será utilizado um exemplo de função em python, com o seguinte passo-a-passo
+Para criar uma função, você deve estar logado no docker em seu computador, será utilizado um exemplo de função em python, com o seguinte passo-a-passo:
+
 baixar o repositório dos templates de python, com: faas-cli template store pull python3-http-debian;
 
 Em seguida, criar uma nova instancia do template python3-debian: faas-cli new (nome) --lang python3-debian --prefix <seu usuário do docker>
 
 Um novo diretório, com o mesmo nome dado ao container será criado no diretório faasd, e um novo arquivo .yml, com o nome dado no comando acima, também será criado, nesse arquivo .yml, podemos customizar nosso container com alguns argumentos.
+
 Nesse caso, usamos como exemplo o container criado para o estudo de caso:
 
     version: 1.0
@@ -63,6 +65,7 @@ Nota: A seção ADDITIONAL_PACKAGE descreve pacotes APT a serem instalados no co
 
 ### modificando dockerfile
 Também é possível modificar a Dockerfile de um template, nesse exemplo iremos modificar a Dockerfile do template python3-debian, para que durante a criação do container um haarcascade para detecção facial seja baixado e guardado no deiretório onde a função é executada.
+
 Na linha 39 da Dockerfile, adicionamos a seguinte linha
 
     RUN curl --output-dir /home/app/function -O https://raw.githubusercontent.com/opencv/opencv/refs/heads/master/data/haarcascades/haarcascade_frontalface_default.xml
@@ -83,8 +86,11 @@ Para utilizar a IU do Openfaas, em seu navegador acesse o seguinte endereço: (I
 # Como executar o processador de imagens
 ### motion
 Instale o Motion inserindo o seguinte comando no terminal: sudo apt install motion
+
 No diretório /etc/motion/, altere o conteúdo arquivo motion.conf para o conteúdo do arquivo de mesmo nome presente neste repositório
+
 Em seguida, no código do processador de imagens, especifique o caminho para o diretório onde as imagens estão sendo salvas (por padrão, é /var/lib/motion/), isso pode ser modificado no motion.conf
+
 Também especifique o caminho onde o Haarcascade está salvo em seu computador
 
     cpu_usage = 0 #Inicializa variável de uso de CPU
